@@ -1,0 +1,59 @@
+Start:
+npm run test
+Webpack -> links the JS files together
+Babel -> turns ES2015/6/7 and JSX into ES5 code
+Jest -> automated test runner
+
+Timeline:
+npm run test; Jest test runner starts up; Jest finds all files ending in .test.js and executes tests inside of them
+Jest prints out results to the terminal; Jest waits for a file to change, then runs all tests again.
+
+Any time you're getting ready to test, follow these 3 steps:
+1. Look at each individual part of your app (ex: component, reducer)
+2. Imagine telling a friend 'here's what this piece of code does'' pseudo code description
+3. Write a test to verify each part does what you expect
+
+Structure of test:
+it <-- global function (description of the test, function containing our test logic)
+
+npm run test command starts up Jest. it runs in the command line environment. To solve the issue of React running 
+in a browser environment, JSDOM (this dependency simulates how a browser behaves) was created.
+
+Why this line of code is not the best: 
+expect(div.innerHTML).toContain('Comment Box'); <-- This is an expectation. Core of test writing. Proof that what you're testing is working.
+- expect is the global function.
+- div.innerHTML is the value that we are inspecting (the thing we want to verify).
+- .toContain is the matcher statement (designates how we want to inspect the 'subject').
+- 'Comment Box' is the value that we expect to see (it's what we want our subject to be). This value is not always needed, pending matcher statement.
+
+When we write tests, we try to isolate the component's internal workings from other components.
+
+Enzyme (https://airbnb.io/enzyme/):
+- An open source package created by AirBnb for testing React components a little bit easier.
+- It makes writing expectations much cleaner.
+- npm install --save enzyme enzyme-adapter-react-16 <-- (this number depends on your React version)
+- create a file called setupTests.js in src folder
+- When we make use of Enzyme, we skip the entire process where we render our component into a div after
+creating the div, instead we are going to use 3 general methods:
+  - static render
+    - This is a func() we can pass a component to. It'll render the component, take all the HTML and return an obj
+    that just contains the HTML. Key is we can't modify this.
+  - Shallow render
+    - Takes a component and renders just the component and not the children. It's useful to test one component in isolation and not make any assertions about the child components.
+  - Full DOM
+    - Takes the instance of the component, renders that component and all of its children. We can then interact with 
+    the component (ex: click events). You can pretty much render the whole app and test it out.
+- The methods are above are going to an instance of our components, render them in a slightly different way,
+and return it back to us an object we can test with.
+- After you make the test work one time, try to make it break. *A great habit to have.
+
+Absolute import paths:
+- Create a file called jsconfig.json and add the code inside. (https://facebook.github.io/create-react-app/docs/importing-a-component#absolute-imports)
+- The benefit of absolute paths is that you can move the file around without breaking it.
+- Much easier to do a global find and replace.
+
+Any time you write tests and find common setup and code, you can extract it to a helper function by Jest. It's called BeforeEach.
+
+The describe function is used to group together certain sets of tests that have some common setup/teardown.
+
+(Redux error) The instant you put a connect tag, it's going to look up the hierarchy and try to find the provider. 
