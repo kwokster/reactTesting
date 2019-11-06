@@ -57,3 +57,10 @@ Any time you write tests and find common setup and code, you can extract it to a
 The describe function is used to group together certain sets of tests that have some common setup/teardown.
 
 (Redux error) The instant you put a connect tag, it's going to look up the hierarchy and try to find the provider. 
+
+Testing network requests:
+- npm install --save axios redux-promise moxios
+
+Unit test is isolating a small piece of functionality and testing that.
+
+Integration test: Test many parts of the app (ex: does clicking fetch comments show a list of LI's?).
