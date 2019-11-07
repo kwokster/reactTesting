@@ -64,3 +64,5 @@ Testing network requests:
 Unit test is isolating a small piece of functionality and testing that.
 
 Integration test: Test many parts of the app (ex: does clicking fetch comments show a list of LI's?).
+
+From his experience, you tend to get more value out of integration testing.
